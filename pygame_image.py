@@ -26,15 +26,16 @@ def main():
         screen.blit(bg_img, [-x+3200, 0])
 
         key_lst = pg.key.get_pressed()
-        kk_rct.move_ip((-1, 0))  # 背景と同じ速度で左に流れる
+        sum_mv = [-1, 0]  # 背景と同じ速度で左に流れる
         if key_lst[pg.K_UP]:
-            kk_rct.move_ip((0, -1))
+            sum_mv[1] -= 1
         if key_lst[pg.K_DOWN]:
-            kk_rct.move_ip((0, 1))
+            sum_mv[1] += 1
         if key_lst[pg.K_LEFT]:
-            kk_rct.move_ip((-1, 0))
+            sum_mv[0] -= 1
         if key_lst[pg.K_RIGHT]:
-            kk_rct.move_ip((2, 0))  # 背景の流れを打ち消して右に進む
+            sum_mv[0] += 2  # 背景の流れを打ち消して右に進む
+        kk_rct.move_ip(sum_mv)
         screen.blit(kk_img, kk_rct)
         pg.display.update()
         tmr += 1        
